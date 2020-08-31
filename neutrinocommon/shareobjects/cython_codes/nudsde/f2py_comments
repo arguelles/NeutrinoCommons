@@ -1,0 +1,9 @@
+This was build using : 
+
+1) f2py -c nudsde_python.f -I/home/carlos/programas/nusigma/nusigma-1.16-pyr/inc -I/home/carlos/programas/darksusy/darksusy-5.0.5/src/xcmlib -I/home/carlos/programas/darksusy/darksusy-5.0.5/include -ldarksusy -lFH -lnusigma -m nudsde --build-dir ./build
+
+2) Change path as needed in hacer_wrap
+
+3) ./hacer_wrap
+
+:) - good luck!

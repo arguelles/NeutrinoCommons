@@ -1,0 +1,3 @@
+To generate share object :
+
+python setup_optneuosc.py build_ext --inplace

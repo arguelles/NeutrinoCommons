@@ -1,0 +1,9 @@
+include *.txt
+include neutrinocommon/__init__.py
+recursive-include docs *.txt
+recursive-include neutrinocommon/shareobjects *.so
+prune neutrinocommon/shareobjects/cython_codes
+
+recursive-include neutrinocommon/astro/data *.dat
+recursive-include neutrinocommon/exp/data *.dat
+recursive-include neutrinocommon/neu/data *.dat

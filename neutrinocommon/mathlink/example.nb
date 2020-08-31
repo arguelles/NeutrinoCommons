@@ -1,0 +1,470 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     15789,        461]
+NotebookOptionsPosition[     14656,        420]
+NotebookOutlinePosition[     15093,        437]
+CellTagsIndexPosition[     15050,        434]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+   "THIS", " ", "EXAMPLE", " ", "ILUSTRATES", " ", "THE", " ", "USE", " ", 
+    "OF", " ", "THE", " ", "NEUTRINOCOMMON"}], "-", 
+   RowBox[{"MATHLINK", " ", "INTERFACE"}]}], "*)"}]], "Input",
+ CellChangeTimes->{{3.549802906223002*^9, 3.549802938896782*^9}, {
+  3.550263742090317*^9, 3.550263756620325*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Set", " ", "the", " ", "neutrino", " ", "oscillation", " ", "parameters", 
+    " ", "to", " ", "default"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"SetDefaultParameters", "[", "]"}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.549802979412614*^9, 3.5498030235308743`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "The", " ", "function", " ", "GetParams", " ", "will", " ", "return", " ", 
+    "the", " ", "CURRENT", " ", "oscillation", " ", "parameters"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"GetParams", "[", "]"}]}]], "Input",
+ CellChangeTimes->{{3.5498030307277927`*^9, 3.54980305288196*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"NUMNEU\"\>", ",", "3.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH12\"\>", ",", "0.563943`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH13\"\>", ",", "0.154085`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH23\"\>", ",", "1.570796`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH14\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH24\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH34\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH15\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH25\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH35\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH45\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH16\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH26\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH36\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH46\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH56\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DM21SQ\"\>", ",", "0.0000765`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DM31SQ\"\>", ",", "0.00247`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DM41SQ\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DM51SQ\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DM61SQ\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DELTA1\"\>", ",", "1.570796`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DELTA2\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DELTA3\"\>", ",", "0.`"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.549803053793486*^9, 3.55018825283677*^9, 
+  3.550263780197859*^9, 3.550442199197797*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "We", " ", "can", " ", "change", " ", "the", " ", "current", " ", 
+    "oscillation", " ", "parameters", " ", "using", " ", "setParams"}], 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"for", " ", "one", " ", "parameter"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"SetParams", "[", 
+     RowBox[{"\"\<DELTA1\>\"", ",", "0.0"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"for", " ", "several", " ", "parameters"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SetParams", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\"\<TH13\>\"", ",", "0.1"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<TH12\>\"", ",", "1.3"}], "}"}]}], "]"}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.549803063825097*^9, 3.549803162907432*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"check", " ", "the", " ", "new", " ", "params"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"GetParams", "[", "]"}]}]], "Input",
+ CellChangeTimes->{{3.549803173481358*^9, 3.5498031866613626`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"NUMNEU\"\>", ",", "3.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH12\"\>", ",", "1.3`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH13\"\>", ",", "0.1`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH23\"\>", ",", "1.570796`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH14\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH24\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH34\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH15\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH25\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH35\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH45\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH16\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH26\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH36\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH46\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TH56\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DM21SQ\"\>", ",", "0.0000765`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DM31SQ\"\>", ",", "0.00247`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DM41SQ\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DM51SQ\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DM61SQ\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DELTA1\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DELTA2\"\>", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"DELTA3\"\>", ",", "0.`"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.5498031873386183`*^9, 3.550263825134796*^9, 
+  3.5504422030529947`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+     "Calculating", " ", "oscillation", " ", "probabilities", " ", "is", " ", 
+      "straight", " ", "forward", " ", "using", " ", 
+      RowBox[{"CalNeuOsc", "[", 
+       RowBox[{
+       "ineu", ",", "energy", ",", "body", ",", "track", ",", "neutype", ",", 
+        "abserror", ",", "relerror", ",", "nstate", ",", "opt"}], "]"}], " ", 
+      "\[IndentingNewLine]", "where", " ", "\[IndentingNewLine]", 
+      RowBox[{"ineu", " ", ":", " ", 
+       RowBox[{"neutrino", " ", "initial", " ", "flavor", " ", 
+        RowBox[{"(", 
+         RowBox[{"0", ",", "1", ",", "2", ",", "..."}], ")"}]}]}]}], ";", 
+     "\[IndentingNewLine]", " ", 
+     RowBox[{"energy", " ", ":", " ", 
+      RowBox[{"neutrino", " ", 
+       RowBox[{"energy", " ", "[", "eV", "]"}]}]}], ";", 
+     "\[IndentingNewLine]", " ", 
+     RowBox[{"body", " ", ":", " ", 
+      RowBox[{
+      "body", " ", "where", " ", "the", " ", "neutrino", " ", 
+       "propagates"}]}], ";", "\[IndentingNewLine]", " ", 
+     RowBox[{"track", " ", ":", " ", 
+      RowBox[{"trayectory", " ", "[", 
+       RowBox[{"eV", "^", 
+        RowBox[{"-", "1"}]}], "]"}]}], ";", "\[IndentingNewLine]", " ", 
+     RowBox[{"neutype", " ", ":", " ", 
+      RowBox[{"0", ":", " ", "neutrino"}]}]}], ",", " ", 
+    RowBox[{
+     RowBox[{"1", ":", " ", "antineutrino"}], ";", "\[IndentingNewLine]", " ", 
+     RowBox[{"abserror", " ", ":", " ", 
+      RowBox[{"RK", "-", 
+       RowBox[{"absolute", " ", "error"}]}]}], ";", "\[IndentingNewLine]", 
+     " ", 
+     RowBox[{"relerror", " ", ":", " ", 
+      RowBox[{"RK", "-", 
+       RowBox[{"relative", " ", "error"}]}]}], ";", "\[IndentingNewLine]", 
+     " ", 
+     RowBox[{"nstate", " ", ":", " ", 
+      RowBox[{"return", " ", "neutrino", " ", "state", " ", 
+       RowBox[{"(", "1", ")"}], " ", "or", " ", "probabilities", " ", 
+       RowBox[{"(", "0", ")"}]}]}], ";", " ", 
+     RowBox[{"opt", " ", ":", " ", 
+      RowBox[{"turn", " ", "rediagonalization", " ", "optimization", " ", 
+       RowBox[{"ON", "/", "OFF"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+     "the", " ", "last", " ", "4", " ", "entries", " ", "are", " ", 
+      "optional", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"default", " ", "values", " ", "are", " ", "used"}], ")"}], 
+       "."}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"CalNeuOsc", "[", 
+   RowBox[{"0", ",", 
+    RowBox[{"10.0", " ", "MeV"}], ",", 
+    RowBox[{"Vacuum", "[", "]"}], ",", 
+    RowBox[{"VacuumTrack", "[", 
+     RowBox[{
+      RowBox[{"0.0", " ", "km"}], ",", 
+      RowBox[{"10", " ", "km"}]}], "]"}], ",", "0"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.549800634248294*^9, 3.549800634254815*^9}, {
+   3.549803209764121*^9, 3.5498034316602917`*^9}, {3.549803467219401*^9, 
+   3.5498035503891687`*^9}, {3.549804009841332*^9, 3.549804028498317*^9}, 
+   3.550263890410626*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.9971566243347807`", ",", "0.00037231005598194455`", ",", 
+   "0.0024716726177476294`"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.549800638114181*^9, {3.550263875013123*^9, 3.550263891442688*^9}, 
+   3.550442205365836*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CalNeuOsc", "[", 
+  RowBox[{"1", ",", 
+   RowBox[{"3.0", " ", "GeV"}], ",", 
+   RowBox[{"Vacuum", "[", "]"}], ",", 
+   RowBox[{"VacuumTrack", "[", 
+    RowBox[{
+     RowBox[{"0.0", " ", "km"}], ",", 
+     RowBox[{"1000", " ", "km"}]}], "]"}], ",", "0"}], "]"}]], "Input",
+ CellChangeTimes->{{3.54980357481483*^9, 3.549803609758606*^9}, {
+  3.54980364367564*^9, 3.5498036687804317`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.028469617528362915`", ",", "0.971529951034379`", ",", 
+   "2.7734319940859758`*^-6"}], "}"}]], "Output",
+ CellChangeTimes->{{3.549803591736177*^9, 3.549803610323493*^9}, {
+   3.549803644865183*^9, 3.549803669191306*^9}, 3.550442206527986*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Similarly", " ", "we", " ", "can", " ", "calculate", " ", "the", " ", 
+    "oscillation", " ", "probabilities", " ", "for", " ", "other", " ", 
+    "bodies"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"constant", " ", "density"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"CalNeuOsc", "[", 
+    RowBox[{"0", ",", 
+     RowBox[{"10.0", " ", "MeV"}], ",", 
+     RowBox[{"ConstantDensity", "[", 
+      RowBox[{"5.0", ",", "0.5"}], "]"}], ",", 
+     RowBox[{"ConstantDensityTrack", "[", 
+      RowBox[{
+       RowBox[{"0.0", " ", "km"}], ",", 
+       RowBox[{"100", " ", "km"}]}], "]"}], ",", "0"}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"variable", " ", 
+     RowBox[{"(", "linear", ")"}], " ", "density"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"CalNeuOsc", "[", 
+    RowBox[{"0", ",", 
+     RowBox[{"20.0", " ", "MeV"}], ",", 
+     RowBox[{"VariableDensity", "[", 
+      RowBox[{"5.0", ",", "20.0", ",", "0.5"}], "]"}], ",", 
+     RowBox[{"VariableDensityTrack", "[", 
+      RowBox[{
+       RowBox[{"0.0", " ", "km"}], ",", 
+       RowBox[{"100", " ", "km"}]}], "]"}], ",", "0"}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", "star", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"CalNeuOsc", "[", 
+    RowBox[{"0", ",", 
+     RowBox[{"50.0", " ", "MeV"}], ",", 
+     RowBox[{"Star", "[", 
+      RowBox[{
+       RowBox[{"10000.0", " ", "km"}], ",", 
+       RowBox[{"100.0", "km"}], ",", "100.0"}], "]"}], ",", 
+     RowBox[{"StarTrack", "[", 
+      RowBox[{
+       RowBox[{"0.0", " ", "km"}], ",", 
+       RowBox[{"10000", " ", "km"}]}], "]"}], ",", "0"}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", "earth", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"CalNeuOsc", "[", 
+    RowBox[{"0", ",", 
+     RowBox[{"10.0", " ", "MeV"}], ",", 
+     RowBox[{"Earth", "[", "]"}], ",", 
+     RowBox[{"EarthTrack", "[", 
+      RowBox[{
+       RowBox[{"0.0", " ", "km"}], ",", 
+       RowBox[{"1000", " ", "km"}], ",", 
+       RowBox[{"1000", " ", "km"}]}], "]"}], ",", "0"}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", "AGN", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"CalNeuOsc", "[", 
+    RowBox[{"2", ",", 
+     RowBox[{"100.0", " ", "MeV"}], ",", 
+     RowBox[{"AGN", "[", 
+      RowBox[{
+       RowBox[{"1000.0", "km"}], ",", "10.0", ",", "0.5"}], "]"}], ",", 
+     RowBox[{"AGNTrack", "[", 
+      RowBox[{
+       RowBox[{"0.0", " ", "km"}], ",", 
+       RowBox[{"1000", " ", "km"}]}], "]"}], ",", "0"}], "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.550443482495461*^9, 3.550443760398656*^9}, {
+  3.550443885720796*^9, 3.550443911003183*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.44989459920534963`", ",", "0.0071579377599464075`", ",", 
+   "0.542958302885127`"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.5504437676970367`*^9, {3.550443865995914*^9, 3.550443912412459*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.8239819250279801`", ",", "0.0025154508529195573`", ",", 
+   "0.1735077094340594`"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.5504437676970367`*^9, {3.550443865995914*^9, 3.5504439124172783`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.6896562345696554`", ",", "0.08124520274762757`", ",", 
+   "0.22932946251603803`"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.5504437676970367`*^9, {3.550443865995914*^9, 3.550443912498871*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.8923278979422107`", ",", "0.04560146403358234`", ",", 
+   "0.062183431593391195`"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.5504437676970367`*^9, {3.550443865995914*^9, 3.550443912559917*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.5429584180512353`", ",", "0.013097747486275367`", ",", 
+   "0.4439438770914767`"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.5504437676970367`*^9, {3.550443865995914*^9, 3.5504439125718307`*^9}}]
+}, Open  ]]
+},
+WindowSize->{740, 1012},
+WindowMargins->{{Automatic, 177}, {10, Automatic}},
+Magnification:>FEPrivate`If[
+  FEPrivate`Equal[FEPrivate`$VersionNumber, 6.], 1.5, 1.5 Inherited],
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (November 7, 2010)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 359, 8, 71, "Input"],
+Cell[919, 30, 341, 8, 98, "Input"],
+Cell[CellGroupData[{
+Cell[1285, 42, 348, 8, 98, "Input"],
+Cell[1636, 52, 1945, 52, 206, "Output"]
+}, Open  ]],
+Cell[3596, 107, 891, 26, 179, "Input"],
+Cell[CellGroupData[{
+Cell[4512, 137, 251, 6, 71, "Input"],
+Cell[4766, 145, 1912, 52, 206, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6715, 202, 2934, 67, 530, "Input"],
+Cell[9652, 271, 268, 7, 43, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9957, 283, 410, 10, 71, "Input"],
+Cell[10370, 295, 287, 6, 47, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10694, 306, 2729, 71, 584, "Input"],
+Cell[13426, 379, 240, 6, 62, "Output"],
+Cell[13669, 387, 242, 6, 62, "Output"],
+Cell[13914, 395, 239, 6, 62, "Output"],
+Cell[14156, 403, 240, 6, 62, "Output"],
+Cell[14399, 411, 241, 6, 62, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

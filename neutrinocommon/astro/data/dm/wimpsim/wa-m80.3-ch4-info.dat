@@ -1,0 +1,28 @@
+### Run with WimpAnn version = wimpann-2.08                            
+###   Using Pythia version   = Pythia 6.400    
+###   Using nusigma version  = nusigma-1.15-pyr                        
+###   Using DarkSUSY version = ds-4.1.6                                
+###   WimpAnn run started at date 2007-09-12; time 05:01:15
+### Neutrino oscillation parameters
+#      theta_12 =  0.00000000E+00
+#      theta_13 =  0.00000000E+00
+#      theta_23 =  0.00000000E+00
+#         delta =  0.00000000E+00
+#  delta_m^2_21 =  0.81000000E-04
+#  delta_m^2_31 =  0.22000000E-02
+### WimpAnn run parameters
+#  Annihilation channel =         4
+#  Generated particles =  tau-             tau+            
+#  WIMP mass =  0.80300000E+02
+#  Number of annihilations =   2500000
+#  Source = Sun/Earth
+ SUMMARY
+  Annihilation channel:  4
+  Generated particles: tau-     tau+     
+  WIMP mass =     80.3
+  Number of annihilations  =   2500000
+  Number of found neutrinos (Sun, incl. sec.) =   6865734
+  Number of found neutrinos (Earth) =   6758696
+  Number of neutrinos that interacted in Sun (incl. sec.) =    706842
+  Number of neutrinos that were absorbed in Sun =    171344
+  Number of secondary neutrinos in Sun =    411331

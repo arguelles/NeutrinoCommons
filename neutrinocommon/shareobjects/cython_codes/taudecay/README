@@ -1,0 +1,7 @@
+# Author : C.Arguelles
+
+1) Modify setup.py by changing the requested paths.
+
+2) Execute :
+
+python setup.py build_ext --inplace

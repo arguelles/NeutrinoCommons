@@ -1,0 +1,857 @@
+from libc.math cimport sin,cos,sqrt,log
+from numpy import zeros,dot,array
+
+from scipy.linalg.matfuncs import expm2
+
+# importing some UNoptimice libraries
+import neutrinocommon.tools.generaltools as gt
+import neutrinocommon.shareobjects.taudecay as td
+import neutrinocommon.physconst.physicsconstants as PC
+import neutrinocommon.neu.xsections as xs
+import numpy as np
+import pygsl.odeiv as odeiv
+
+""" Small library with the optimiced python osc. calculation functions.
+This library is implemented in Cython. And is meant to be fully compatible
+with #{neuosc}.
+"""    
+
+cdef extern from "complex.h":
+    double norm(complex)
+
+cdef double norm(complex x):
+    return sqrt(x.real*x.real + x.imag*x.imag)
+    
+cpdef double chi2(double th, double exp):
+    return (exp - th)*(exp - th)/exp
+    
+cpdef cvec(vv,param):
+    cdef int i
+    neu = zeros([param.numneu,1],complex)
+    for i in range(0,2*param.numneu,2):
+        neu[i/2,0] = complex(vv[i],vv[i+1])
+    return neu
+
+cpdef rvec(vv,param):
+    cdef int i
+    neu = np.zeros([2*param.numneu],float)
+    for i in np.arange(0,2*param.numneu,2):
+        neu[i] = vv[i/2,0].real
+        neu[i+1] = vv[i/2,0].imag
+    return neu
+
+cpdef flavorAcc(param,E,body,track):
+    # Charge-current potential
+    # E : neutrino energy
+    # body : body where the neutrino propagetes
+    # track : trayectory
+    Acc = zeros([param.numneu,param.numneu],complex)
+    ye = body.ye(track)
+    CC = param.sqr2*param.GF*param.Na*param.cm**-3*body.density(track)*ye
+    #NC = CC*body.RNC(track)
+    NC = CC*(-0.5*(1.0-ye)/ye)
+    Acc[0,0] = complex(CC+NC,0.0)
+    Acc[1,1] = complex(NC,0.0)
+    Acc[2,2] = complex(NC,0.0)
+    if param.neutype == "neutrino":
+        return Acc
+    elif param.neutype == "antineutrino":
+        return -Acc
+    else :
+        print "Wrong neutrino type."
+        quit()
+        
+cpdef flavorH(track,param,flavorM2,body,E):
+    # Flavor Hamiltonian WARNING FACTOR II in front
+    # rhs of the Mikheev-Smirnov-Wolfenstein (MSW) eq.
+    ii = complex(0.0,-1.0)
+    #return (ii/(2.0*E))*(flavorM2+flavorAcc(param,E,body,track))
+    return (ii)*(flavorM2/(2.0*E)+flavorAcc(param,E,body,track))
+
+cpdef RHS(neuvec,double x,track,param,flavorM2,body,double E):
+    # Right hand side in Schrodinger's equations
+    track.x = x
+    ## this should be done in complex plane -- TMP
+    neuvec = cvec(neuvec,param)
+    rhs = dot(flavorH(track,param,flavorM2,body,E),neuvec)
+    tmprhs = (array([[val[0].real,val[0].imag] for val in rhs])).flatten()        
+    return tmprhs
+
+#cpdef RHS_GSL(double x,neuvec,track,param,flavorM2,body,double E):
+cpdef RHS_GSL(double x,neuvec,params):
+    track,param,flavorM2,body,E = params.track, params.param,params.flavorM2,params.body,params.E
+    # Right hand side in Schrodinger's equations
+    track.x = x
+    ## this should be done in complex plane -- TMP
+    neuvec = cvec(neuvec,param)
+    rhs = dot(flavorH(track,param,flavorM2,body,E),neuvec)
+    tmprhs = (array([[val[0].real,val[0].imag] for val in rhs])).flatten()        
+    return tmprhs
+
+cpdef R(int i, int j,int cp,param):
+    cdef int k
+    cdef double sd,cd
+    cdef complex faseCP
+    #cdef complex R[][]
+    #cdef CMatrix<complex> R
+    #cdef list[complex][complex] R
+        
+    # rotation matrix generator
+    R = zeros([param.numneu,param.numneu],complex)
+    # diagonal terms
+    for k in range(param.numneu):
+        if(k != i-1 and k != j-1):
+            R[k,k] = 1.0
+        else :
+            R[k,k] = param.c[i,j]
+    # non-diagonal terms
+    if(cp != 0):
+        sd = sin(param.dcp[cp])
+        cd = cos(param.dcp[cp])
+        faseCP = complex(cd,sd)
+    else:
+        faseCP = complex(1.0,0.0)
+        
+    R[i-1,j-1] = param.s[i,j]*faseCP.conjugate()
+    R[j-1,i-1] = -param.s[i,j]*faseCP
+    return R
+    
+cdef Ropt(int i,int j,int nn,int cp,double s[4][4],double c[4][4],double dcp[4]):
+    cdef int k
+    cdef double sd,cd
+    cdef complex faseCP
+    #cdef complex R[4][4]
+        
+    # rotation matrix generator
+    R = zeros([nn,nn],complex)
+    # diagonal terms
+    for k in range(nn):
+        if(k != i-1 and k != j-1):
+            R[k,k] = 1.0
+        else :
+            R[k,k] = c[i][j]
+    # non-diagonal terms
+    if(cp != 0):
+        sd = sin(dcp[cp])
+        cd = cos(dcp[cp])
+        faseCP = complex(cd,sd)
+    else:
+        faseCP = complex(1.0,0.0)
+        
+    R[i-1,j-1]  == s[i][j]*faseCP.conjugate()
+    R[j-1,i-1] = -s[i][j]*faseCP
+    return R    
+    
+cpdef calcU(param):
+    if(param.numneu == 3):
+        return dot(R(2,3,0,param),dot(R(1,3,1,param),R(1,2,0,param)))
+    elif(param.numneu == 4):
+        return dot(R(3,4,0,param),dot(R(2,4,2,param),dot(R(1,4,0,param),dot(R(2,3,0,param),dot(R(1,3,1,param),R(1,2,0,param))))))
+
+cpdef double AvgProbNeuVacuum(int ineu,int fneu,U,param):
+    #cdef double norm
+    cdef double prob
+    cdef list[complex] vini
+    cdef list[complex] vfinal
+    
+    vini    = U[ineu,:]
+    vfinal  = U[fneu,:]
+    
+    prob = 0.0
+    for i in range(param.numneu):
+        prob = prob + norm(vini[i])**2*norm(vfinal[i])**2
+    return prob
+
+cpdef AvgProbability(fneu_flavor,PMNS,param):
+    cdef int flv
+    #cdef double prob
+    fneu_mass = dot(PMNS.UCT,fneu_flavor)
+    prob_flv = []
+    for flv in range(param.numneu):
+        vfinal = PMNS.U[flv,:]
+        prob = 0.0
+        for i in range(param.numneu):
+            prob = prob + gt.norm(fneu_mass[i])**2*gt.norm(vfinal[i])**2
+        prob_flv.append(prob[0])
+    return prob_flv
+
+
+#===============================================================================
+# FAST DATA COUNTING
+#===============================================================================
+
+#cpdef DMEvtProcess(list[double] E_nu_bin, list[double] E_anu_bin,list[double] E_nu_list, list[double] E_bin_width, events,DM_pdf_table,double E_nu_list_0,double log_E_bin_ratio,double DMm_GeV):
+cpdef DMEvtProcess(E_nu_bin,E_anu_bin,E_nu_list,E_bin_width,events,DM_pdf_table,double E_nu_list_0,double log_E_bin_ratio,double DMm_GeV):    
+    cdef int i,ii,jj,ini,ineu,iineu,ineutype,family
+    cdef double E_nu_in,E_nu_out
+    
+    cdef double eps
+    
+    eps = 1.0e-4
+    
+    cdef double E_prev
+    
+    E_prev = 1.0
+    
+    for i,e in enumerate(events):
+        
+        if len(e) > 5:
+            family = e[0]
+            iineu = e[1]
+            ineutype = e[2]
+            E_nu_in  = e[3]
+            E_nu_out = e[4]
+            
+            if E_nu_in != E_prev :
+                try:
+                    ii = 1
+                    same_evt = True
+                    while same_evt :
+                        next_family = events[i+ii]
+                        if len(next_family) == 5 and events[i+ii][0] != events[i+ii+1][0]:
+                            ii = ii + 1
+                            break
+                        elif events[i+ii][0] != events[i+ii+1][0]:
+                            break
+                        elif next_family < family:
+                            break
+                        else :
+                            ii = ii + 1
+                            
+                    ii = ii-1
+                except:
+                    if len(events[i+ii]) > 5:
+                        ii = 0
+                    else :
+                        ii = 1
+                    
+                ini_evt_energy = events[i+ii][3]
+            else :
+                ini_evt_energy = E_nu_in
+                
+            if E_nu_in > ini_evt_energy:
+                ini_evt_energy = E_nu_in
+            
+            ii = int(log(E_nu_out/E_nu_list_0)/log_E_bin_ratio+eps)
+            ini = int(log(ini_evt_energy/E_nu_list_0)/log_E_bin_ratio+eps)
+            
+            #if ineutype == 0:
+            #    if ini_evt_energy > DMm_GeV and DM_pdf_table[iineu*2][ini] > 0:
+            #        print E_nu_in,ini_evt_energy
+            #        print int(log(ini_evt_energy/E_nu_list_0)/log_E_bin_ratio),DM_pdf_table[iineu*2][int(log(ini_evt_energy/E_nu_list_0)/log_E_bin_ratio)]
+            #        print e, DM_pdf_table[iineu*2][ini],DMm_GeV,log(ini_evt_energy/E_nu_list_0)/log_E_bin_ratio
+            #        raw_input("Press Enter to continue...")
+            #elif ineutype == 1:
+            #    if ini_evt_energy > DMm_GeV and DM_pdf_table[iineu*2+1][ini] > 0:
+            #        print E_nu_in,ini_evt_energy
+            #        print e, DM_pdf_table[iineu*2+1][ini]
+            #        raw_input("Press Enter to continue...")            
+            
+            if ineutype == 0:
+                DM_pdf_array = DM_pdf_table[iineu*2]
+                if E_nu_in + E_bin_width[ini] > DMm_GeV :
+                    E_nu_bin[ii]  = E_nu_bin[ii]  + e[6]*(DM_pdf_array[ini])*(DMm_GeV-E_nu_list[ini])
+                else:
+                    E_nu_bin[ii]  = E_nu_bin[ii]  + e[6]*(DM_pdf_array[ini])*E_bin_width[ini]
+            elif ineutype == 1 :
+                DM_pdf_array = DM_pdf_table[iineu*2+1]
+                if E_nu_in + E_bin_width[ini] > DMm_GeV :
+                    E_anu_bin[ii] = E_anu_bin[ii] + e[6]*(DM_pdf_array[ini])*(DMm_GeV-E_nu_list[ini])
+                else :
+                    E_anu_bin[ii] = E_anu_bin[ii] + e[6]*(DM_pdf_array[ini])*E_bin_width[ini]
+                    
+            E_prev = E_nu_in
+            
+    return [E_nu_bin,E_anu_bin]
+    
+cpdef DMEvtProcessv2(E_nu_bin,E_anu_bin,E_nu_list,E_bin_width,events,DM_pdf_table,double E_nu_list_0,double log_E_bin_ratio,double DMm_GeV, double E_in_GeV,int ini,fam_num,ineu):
+    cdef int i,ii,jj,iineu,ineutype,family
+    cdef double E_nu_in,E_nu_out
+    
+    cdef double eps
+    
+    eps = 1.0e-4
+    
+    for i,e in enumerate(events):
+        
+        if len(e) > 5:
+            family = e[0]
+            iineu  = e[1]
+            ineutype = e[2]
+            E_nu_in  = e[3]
+            E_nu_out = e[4]
+            
+            fam_factor = fam_num[family-1]
+            
+            ini_evt_energy = E_in_GeV
+            
+            ii = int(log(E_nu_out/E_nu_list_0)/log_E_bin_ratio+eps)
+            
+            #if E_nu_out != E_in_GeV :
+            #    print e
+            #    print E_nu_out, e[6], ii
+            #    raw_input("Wait ...")
+            #ini = int(log(ini_evt_energy/E_nu_list_0)/log_E_bin_ratio+eps)
+            
+            iineu = ineu
+            
+            if ineutype == 0:
+                DM_pdf_array = DM_pdf_table[iineu*2]
+                if E_nu_in + E_bin_width[ini] > DMm_GeV:
+                    E_nu_bin[ii]  = E_nu_bin[ii]  + e[6]*(DM_pdf_array[ini])*(DMm_GeV-E_nu_list[ini])/fam_factor
+                else:
+                    E_nu_bin[ii]  = E_nu_bin[ii]  + e[6]*(DM_pdf_array[ini])*E_bin_width[ini]/fam_factor
+            elif ineutype == 1 :
+                DM_pdf_array = DM_pdf_table[iineu*2+1]
+                if E_nu_in + E_bin_width[ini] > DMm_GeV :
+                    E_anu_bin[ii] = E_anu_bin[ii] + e[6]*(DM_pdf_array[ini])*(DMm_GeV-E_nu_list[ini])/fam_factor
+                else :
+                    E_anu_bin[ii] = E_anu_bin[ii] + e[6]*(DM_pdf_array[ini])*E_bin_width[ini]/fam_factor
+            
+    return [E_nu_bin,E_anu_bin]    
+    
+cpdef DMEvtProcess_Flux(E_nu_bin,E_anu_bin,E_nu_list,E_bin_width,events,DM_pdf_table,double E_nu_list_0,double log_E_bin_ratio,double DMm_GeV):    
+    cdef int i,ii,jj,ini,ineu,iineu,ineutype,family
+    cdef double E_nu_in,E_nu_out
+    
+    cdef double eps
+    
+    eps = 1.0e-4
+    
+    cdef double E_prev
+    
+    E_prev = 1.0
+    
+    for i,e in enumerate(events):
+        
+        if len(e) > 5:
+            family = e[0]
+            iineu = e[1]
+            ineutype = e[2]
+            E_nu_in  = e[3]
+            E_nu_out = e[4]
+            
+            if E_nu_in != E_prev :
+                try:
+                    ii = 1
+                    same_evt = True
+                    while same_evt :
+                        next_family = events[i+ii]
+                        if len(next_family) == 5 and events[i+ii][0] != events[i+ii+1][0]:
+                            ii = ii + 1
+                            break
+                        elif events[i+ii][0] != events[i+ii+1][0]:
+                            break
+                        elif next_family < family:
+                            break
+                        else :
+                            ii = ii + 1
+                            
+                    ii = ii-1
+                except:
+                    if len(events[i+ii]) > 5:
+                        ii = 0
+                    else :
+                        ii = 1
+                    
+                ini_evt_energy = events[i+ii][3]
+            else :
+                ini_evt_energy = E_nu_in
+                
+            if E_nu_in > ini_evt_energy:
+                ini_evt_energy = E_nu_in
+            
+            ii = int(log(E_nu_out/E_nu_list_0)/log_E_bin_ratio+eps)
+            ini = int(log(ini_evt_energy/E_nu_list_0)/log_E_bin_ratio+eps)          
+            
+            if ineutype == 0:
+                DM_pdf_array = DM_pdf_table[iineu*2]
+                E_nu_bin[ii]  = E_nu_bin[ii]  + e[6]*(DM_pdf_array[ini])
+            elif ineutype == 1 :
+                DM_pdf_array = DM_pdf_table[iineu*2+1]
+                E_anu_bin[ii] = E_anu_bin[ii] + e[6]*(DM_pdf_array[ini])
+                    
+            E_prev = E_nu_in
+            
+    return [E_nu_bin,E_anu_bin]
+    
+cpdef DMEvtProcess_Fluxv2(E_nu_bin,E_anu_bin,E_nu_list,E_bin_width,events,DM_pdf_table,double E_nu_list_0,double log_E_bin_ratio,double DMm_GeV,E_in_GeV,fam_num,ineu):    
+    cdef int i,ii,jj,ini,iineu,ineutype,family
+    cdef double E_nu_in,E_nu_out
+    
+    cdef double eps
+    
+    eps = 1.0e-4
+    
+    for i,e in enumerate(events):
+        
+        if len(e) > 5:
+            family = e[0]
+            iineu = e[1]
+            ineutype = e[2]
+            E_nu_in  = e[3]
+            E_nu_out = e[4]
+            
+            
+            fam_factor = fam_num[family-1]
+            ini_evt_energy = E_in_GeV
+            
+            iineu = ineu
+            
+            ii = int(log(E_nu_out/E_nu_list_0)/log_E_bin_ratio+eps)
+            ini = int(log(ini_evt_energy/E_nu_list_0)/log_E_bin_ratio+eps)
+            
+            if ini != ii :
+                ii = ini
+                if ineutype == 0:
+                    DM_pdf_array = DM_pdf_table[iineu*2]
+                    E_nu_bin[ii]  = E_nu_bin[ii]  + e[6]*(DM_pdf_array[ini])/fam_factor
+                elif ineutype == 1 :
+                    DM_pdf_array = DM_pdf_table[iineu*2+1]
+                    E_anu_bin[ii] = E_anu_bin[ii] + e[6]*(DM_pdf_array[ini])/fam_factor
+            
+    return [E_nu_bin,E_anu_bin]        
+    
+cpdef DMEvtProcess_old(E_nu_bin,E_anu_bin,E_nu_list,E_bin_width,events,DM_pdf_table,double E_nu_list_0,double log_E_bin_ratio,double DMm_GeV,neutype):
+    ## ONLY FOR OLD DATA FILES
+    cdef int i,ii,jj,ini,iineu,ineu,ineutype,family
+    cdef double E_nu_in,E_nu_out
+    
+    cdef double E_prev
+    
+    E_prev = 1.0
+    
+    for i,e in enumerate(events):
+        
+        if len(e) > 4:
+            family = e[0]
+            iineu = e[1]
+            E_nu_in  = e[2]
+            E_nu_out = e[3]
+            
+            if neutype == 0:
+                neutrino = True
+            elif neutype == 1:
+                neutrino = False
+            
+            try:
+                next_family = events[i+1]
+                if family == next_family and e[1] != 2 :
+                    if neutype == 0:
+                        neutrino = False
+                    elif neutype == 1 :
+                        neutrino = True
+                        
+            except:
+                pass
+            
+            if E_nu_in != E_prev :
+                try:
+                    ii = 1
+                    same_evt = True
+                    while same_evt :
+                        next_family = events[i+ii]
+                        if len(next_family) == 4 or events[i+ii][0] != events[i+ii+1][0]:
+                            break
+                        else :
+                            ii = ii + 1
+                            
+                    ii = ii-1
+                except:
+                    ii = 0 
+                ini_evt_energy = events[i+ii+1][2]
+            else :
+                ini_evt_energy = E_nu_in
+            
+            ii = int(log(E_nu_out/E_nu_list_0)/log_E_bin_ratio)
+            ini = int(log(ini_evt_energy/E_nu_list_0)/log_E_bin_ratio)
+            
+            if neutrino:
+                DM_pdf_array = DM_pdf_table[iineu*2]
+                if E_nu_in + E_bin_width[jj] > DMm_GeV :
+                    E_nu_bin[ii]  = E_nu_bin[ii]  + e[5]*(DM_pdf_array[ini])*(DMm_GeV-E_nu_list[ini])
+                else:
+                    E_nu_bin[ii]  = E_nu_bin[ii]  + e[5]*(DM_pdf_array[ini])*E_bin_width[ini]
+            else:
+                DM_pdf_array = DM_pdf_table[iineu*2+1]
+                if E_nu_in + E_bin_width[jj] > DMm_GeV :
+                    E_anu_bin[ii] = E_anu_bin[ii] + e[5]*(DM_pdf_array[ini])*(DMm_GeV-E_nu_list[ini])
+                else :
+                    E_anu_bin[ii] = E_anu_bin[ii] + e[5]*(DM_pdf_array[ini])*E_bin_width[ini]
+                    
+            E_prev = E_nu_in
+            
+    return [E_nu_bin,E_anu_bin]
+    
+    
+cpdef MCAbsorptionProbability(E_nu_bin,E_anu_bin,E_nu_list,E_bin_width,events,double E_nu_list_0,double log_E_bin_ratio):    
+    cdef int i,ii,jj,ini,ineu,iineu,ineutype,family
+    cdef double E_nu_in,E_nu_out
+    
+    cdef double eps
+    
+    eps = 1.0e-4
+    
+    cdef double E_prev
+    
+    E_prev = 1.0
+    
+    for i,e in enumerate(events):
+        
+        if len(e) > 5:
+            family = e[0]
+            iineu = e[1]
+            ineutype = e[2]
+            E_nu_in  = e[3]
+            E_nu_out = e[4]
+            
+            if E_nu_in != E_prev :
+                try:
+                    ii = 1
+                    same_evt = True
+                    while same_evt :
+                        next_family = events[i+ii] 
+                        if len(next_family) == 5 and events[i+ii][0] != events[i+ii+1][0]:
+                            ii = ii + 1
+                            break
+                        elif events[i+ii][0] != events[i+ii+1][0]:
+                            break
+                        elif next_family < family:
+                            break
+                        else :
+                            ii = ii + 1
+                            
+                    ii = ii-1
+                except:
+                    if len(events[i+ii]) > 5:
+                        ii = 0
+                    else :
+                        ii = 1
+
+                ini_evt_energy = events[i+ii][3]
+            else :
+                ini_evt_energy = E_nu_in
+                
+            if E_nu_in > ini_evt_energy:
+                ini_evt_energy = E_nu_in
+            
+            ii = int(log(E_nu_out/E_nu_list_0)/log_E_bin_ratio+eps)
+            ini = int(log(ini_evt_energy/E_nu_list_0)/log_E_bin_ratio+eps)
+            
+            #print events[i]
+            #print events[i+1]
+            #print ii,ini
+            
+            #if ii != ini :
+            #    print e
+            #    raw_input("Press Enter to continue...")
+            #elif e[5] <= 0.0 :
+            #    print e
+            #    raw_input("Press Enter to continue...")                
+                
+            
+            if ii != ini :
+                # NC interaction occurred -> skip
+                pass
+            elif e[5] <= 0.0 :
+                # CC interaction occurred -> skip
+                pass
+            else :
+                if ineutype == 0:
+                        E_nu_bin[ii]  = E_nu_bin[ii]  + 1.0
+                elif ineutype == 1 :
+                        E_anu_bin[ii] = E_anu_bin[ii] + 1.0
+                        
+            #if ineutype == 0:
+            #        E_nu_bin[ii]  = E_nu_bin[ii]  + 1.0
+            #elif ineutype == 1 :
+            #        E_anu_bin[ii] = E_anu_bin[ii] + 1.0                        
+                    
+            E_prev = E_nu_in
+            
+    return [E_nu_bin,E_anu_bin]    
+    
+
+
+#===============================================================================
+# Neu Osc Rediagonalizing Calculation - Cython
+#===============================================================================
+
+
+
+cpdef RHS_INT_GSL(double x,neuvec,params):
+    cdef complex ii
+    ii = complex(0.0,1.0)
+    track,param,flavorM2,body,E,H0 = params.track,params.param,params.flavorM2,params.body,params.E,params.H0
+    
+    # Right hand side in Schrodinger's equations in the interaction basis
+    
+    # moving around 
+    x_prev      = params.rpos
+    x_current   = x
+    track.x = x_current
+    
+    ## this should be done in complex plane -- TMP
+    neuvec = cvec(neuvec,param)
+    
+    # Decompose the Hamiltonian H = H0 + H1
+    # where :
+    #       H0 = H_(r_i)
+    #       H1 = H_(r_i+1) - H_(r_i)
+    
+    H_current = ii*flavorH(track,param,flavorM2,body,E)
+    H1 = H_current - H0
+
+    # opt -> store S
+    #S = S#expm2(-ii*H0*(x_current - x_prev))
+    S = expm2(-ii*H0*(x_current - x_prev))
+
+    interaction_H = dot(S,dot(H1,S.conjugate().T))
+    
+    rhs_int = (-ii)*interaction_H
+    
+    rhs = dot(rhs_int,neuvec)    
+    tmprhs = (array([[val[0].real,val[0].imag] for val in rhs])).flatten()
+    
+    #storing stuff
+    params.cH = H_current
+    params.cS = S
+    return tmprhs
+
+#cpdef NeuOscProbWithCCNCInterationsWithOpt(ineu,E,track,body,flavorM2,PMNS,param,file = None,family = 0,NCCC_int = True):
+#    """ Calculates using RL and saves the probability of neutrino osc. in the N flavors using
+#    Joachim Kopp rediagonalization technique. ZAZ!
+#
+#    @type   ineu    :   int
+#    @param  ineu    :   initial neutrino state
+#    @type   E       :   float
+#    @param  E       :   neutrino energy [eV]
+#    @type   track   :   track object
+#    @param  track   :   asociated trayectory in body
+#    @type   body    :   body
+#    @param  body    :   body with the asociated density profile.
+#    @type   flavorM2:   array
+#    @param  flavorM2:   M^2 in flavor basis
+#    @type   PMNS    :   array
+#    @param  PMNS    :   PMNS matrix
+#    @type   param   :   physicsconstants
+#    @param  param   :   set of physical parameters to be used.
+#    @type   file    :   file object
+#    @param  file    :   open file where data will be printed, if None will return result.
+#    @type   family  :   integer
+#    @param  family  :   returns the same integer for all neutrinos in the same event.
+#    @type   NCCC_int:   boolean
+#    @param  NCCC_int:   toggle NC-CC interactions ON/OFF    
+#    """
+#    #begin define variables
+#    cdef complex ii
+#    cdef int n,k,neu,dim
+#    cdef double r,r_old,r_new,r_adv,body_radius
+#    cdef double E_GeV,E_MC,p_MC,pfac
+#    cdef double pe,pm,pt
+#    cdef double dsde_NC,dsde_CC_e,dsde_CC_m,dsde_CC_t
+#    cdef list[double] neu_state
+#    #end define variables
+#    
+#    ii = complex(0.0,1.0)
+#
+#    if param.neutype == "neutrino":
+#        neu = 0
+#    elif param.neutype == "antineutrino":
+#        neu = 1
+#        
+#    # setup params aux. container
+#    params = params_container()
+#    params.track, params.param,params.flavorM2,params.body,params.E = track,param,flavorM2,body,E
+#    
+#    params.H0 = ii*flavorH(track,param,flavorM2,body,E)
+#    params.S  = np.identity(param.numneu, complex)
+#    
+#    # setup GSL solver
+#    dim     = int(2*param.numneu)
+#    stepper = odeiv.step_rkf45
+#    step    = stepper(dim,RHS_INT_GSL,None,args = params)
+#    control = odeiv.control_y_new(step,1.0e-6,0.0)
+#    evolve  = odeiv.evolve(step,control,dim)
+#    
+#    # initial parameters
+#    neu_state           = [0.0]*dim
+#    neu_state[ineu*2]   = 1.0             # initial state
+#    h = 10.0*param.km                     # initial step size
+#    r = track.xini
+#    
+#    E_in    = params.E/param.GeV
+#    
+#    n = 0
+#    k = 0
+#    
+#    body_radius = body.Radius*param.km
+#    
+#    while r < body_radius :
+#        r_old = r
+#        params.rpos = r
+#        r,h,neu_state = evolve.apply(r,body.Radius*param.km,h,neu_state)
+#        r_new = r
+#        
+#        r_adv = r_new-r_old
+#
+#        if NCCC_int : 
+#            # CC-NC MONTECARLO
+#            E_GeV = params.E/param.GeV
+#            # pick my random point (E,p)
+#            E_MC = np.random.uniform(0.0,E_GeV,1)[0]
+#            p_MC = np.random.uniform(0.0,1.0/E_GeV,1)[0]
+#            # THIS LINES TURN OUT TO BE THE SAME AS Na = 1/AMU BY DEFINITION
+#            #pfac = np.abs(body.density(track)*param.Na*(r_adv/param.cm))
+#            pfac = np.abs((body.density(track)/param.atomic_mass_unit)*(r_adv/param.cm))
+#            
+#            pe = neu_state[0]*neu_state[0]+neu_state[1]*neu_state[1]
+#            pm = neu_state[2]*neu_state[2]+neu_state[3]*neu_state[3]
+#            pt = neu_state[4]*neu_state[4]+neu_state[5]*neu_state[5]
+#            
+#            # compare with stacked cross sections - equivalent to prob
+#            
+#            dsde_NC     = xs.dsde_NC_opt(E_GeV,E_MC,param)
+#            dsde_CC_e   = xs.dsde_CC_opt(E_GeV,E_MC,param,flv = 0)
+#            dsde_CC_m   = dsde_CC_e#xs.dsde_CC_opt(E_GeV,E_MC,param,flv = 1)
+#            dsde_CC_t   = xs.dsde_CC_opt(E_GeV,E_MC,param,flv = 2)
+#            
+#            #print E_GeV,E_MC,dsde_CC_m,dsde_CC_t
+#            
+#            if p_MC <= dsde_NC*pfac:
+#                params.E = E_MC*param.GeV
+#                #m = m + 1
+#            elif p_MC <= (dsde_NC + dsde_CC_e*pe + dsde_CC_m*pm)*pfac:
+#                # discart event because of cc int with e,mu
+#                k = k + 1
+#                #neu_prob = [0.0]*(dim/2)
+#                neu_state   = [0.0]*(dim)
+#                result      = [0.0]*(dim/2)
+#                break
+#            elif p_MC <= (dsde_NC + dsde_CC_e*pe + dsde_CC_m*pm+dsde_CC_t*pt)*pfac:
+#                # decay tau
+#                if not PC.tauola_init:
+#                    # decay and initialize tauola
+#                    neutrino_energies = td.TaudecayNeutrinos(E_MC)
+#                else:
+#                    # decay 
+#                    neutrino_energies = td.TaudecayNeutrinos(E_MC,1)
+#                    
+#                PC.tauola_init = True
+#                if neutrino_energies != []:
+#                    for i in range(0,len(neutrino_energies),2):
+#                        params.track.xini = r
+#                        if int(neutrino_energies[i]>0):
+#                            param.neutype = "neutrino"
+#                            if int(neutrino_energies[i]) == 12:
+#                                # create electron-neutrino
+#                                #neu_prob = NeuOscProbWithCCNCInterations(0,neutrino_energies[i+1]*param.GeV,params.track,params.body,flavorM2,PMNS,param)
+#                                NeuOscProbWithCCNCInterations(0,neutrino_energies[i+1]*param.GeV,params.track,params.body,flavorM2,PMNS,param,file,family)
+#                            elif int(neutrino_energies[i]) == 14:
+#                                # create muon-neutrino
+#                                #neu_prob = NeuOscProbWithCCNCInterations(1,neutrino_energies[i+1]*param.GeV,params.track,params.body,flavorM2,PMNS,param)
+#                                NeuOscProbWithCCNCInterations(1,neutrino_energies[i+1]*param.GeV,params.track,params.body,flavorM2,PMNS,param,file,family)
+#                            elif int(neutrino_energies[i]) == 16:
+#                                # create tau-neutrino
+#                                #neu_prob = NeuOscProbWithCCNCInterations(2,neutrino_energies[i+1]*param.GeV,params.track,params.body,flavorM2,PMNS,param)
+#                                NeuOscProbWithCCNCInterations(2,neutrino_energies[i+1]*param.GeV,params.track,params.body,flavorM2,PMNS,param,file,family)
+#                        else:
+#                            param.neutype = "antineutrino"
+#                            if int(neutrino_energies[i]) == -12:
+#                                # create electron-neutrino
+#                                #neu_prob = NeuOscProbWithCCNCInterations(0,neutrino_energies[i+1]*param.GeV,params.track,params.body,flavorM2,PMNS,param)
+#                                NeuOscProbWithCCNCInterations(0,neutrino_energies[i+1]*param.GeV,params.track,params.body,flavorM2,PMNS,param,file,family)
+#                            elif int(neutrino_energies[i]) == -14:
+#                                # create muon-neutrino
+#                                #neu_prob = NeuOscProbWithCCNCInterations(1,neutrino_energies[i+1]*param.GeV,params.track,params.body,flavorM2,PMNS,param)
+#                                NeuOscProbWithCCNCInterations(1,neutrino_energies[i+1]*param.GeV,params.track,params.body,flavorM2,PMNS,param,file,family)
+#                            elif int(neutrino_energies[i]) == -16:
+#                                # create tau-neutrino
+#                                #neu_prob = NeuOscProbWithCCNCInterations(2,neutrino_energies[i+1]*param.GeV,params.track,params.body,flavorM2,PMNS,param)
+#                                NeuOscProbWithCCNCInterations(2,neutrino_energies[i+1]*param.GeV,params.track,params.body,flavorM2,PMNS,param,file,family)
+#                # count tau
+#                n = n + 1
+#                break
+#                # TAUOLA
+#                # params.E = tauolaenergy
+#            if E_GeV <= 1.0 :
+#                # discart event because of energy treshold
+#                #l = l + 1
+#                #neu_prob = [0.0]*(dim/2)
+#                result = [0.0]*(dim/2)
+#                break
+#        else:
+#            E_GeV = params.E/param.GeV
+#
+#        # ZAZ beginning rediagonalization optimization ZAZ
+#        # CALCULATE exp(-i H0 (r-r0))
+#        # where H0 = H(r_current) = cH
+#        S = expm2(-ii*params.cH*(r_adv))
+#        
+#        # saving this for next calculation
+#        params.H0 = params.cH
+#        # UNDO LAST TRANSFORMATION : psi = S psi
+#        neu_state = rvec(dot(S.conjugate().T,cvec(neu_state,param)),param)
+#        
+#        #steps = steps + 1
+#    
+#    #print m,k,n,l,steps,E_GeV
+#    if r >= body.Radius*param.km or k>0.0:
+#        # if it is out or it had a CC-mu-e interaction
+#        result = AvgProbability(cvec(neu_state,param),PMNS,param)
+#    else :
+#        # discart event
+#        result = []
+#    result.insert(0,E_GeV)
+#    result.insert(0,E_in)
+#    if neu == 1:
+#        result.insert(0,1)
+#    else:
+#        result.insert(0,0)    
+#    result.insert(0,ineu)
+#    result.insert(0,family)
+#    #print param.neutype    
+#    if file == None:
+#        return result
+#    else:
+#        gt.hwritefile(file,result,param,header = False)
+#        #gt.quickprint(file,result)
+#        
+#    # cleaning up #
+#    if neu == 0 :
+#        param.neutype = "neutrino"
+#    elif neu == 1 :
+#        param.neutype = "antineutrino"
+#        
+#    del params    
+#
+#
+#cpdef class params_container():
+#    track   = None
+#    param   = None
+#    flavorM2 = None
+#    body    = None
+#    E       = None
+#    
+#    # for opt
+#    H0 = None
+#    S  = None
+#    rpos = None
+#    cH = None
+#    cS = None
+
+
+
+## PYREX LIKE IMPLEMENTATION ##
+#
+#cdef int RHS (double x, double psi[], double f[], void *params)
+#    double track.x
+#    double neuvec[]
+#    double tmprhs[]
+#    double rhs[]
+#    
+#    track.x = x
+#    neuvec = cvec(neuvec,param)
+#    rhs = dot(flavorH(track,param,flavorM2,body,E),neuvec)
+#    tmprhs = (array([[val[0].real,val[0].imag] for val in rhs])).flatten()        
+

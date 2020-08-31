@@ -1,0 +1,3 @@
+To generate share object :
+
+python setup_dm_opt.py build_ext --inplace

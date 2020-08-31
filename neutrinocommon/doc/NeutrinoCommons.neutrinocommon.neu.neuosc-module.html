@@ -1,0 +1,1526 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>NeutrinoCommons.neutrinocommon.neu.neuosc</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >neutrinocommon</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;NeutrinoCommons ::
+        Package&nbsp;neutrinocommon ::
+        Package&nbsp;neu ::
+        Module&nbsp;neuosc
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module neuosc</h1><p class="nomargin-top"><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html">source&nbsp;code</a></span></p>
+<p>Author  : C.A. Arguelles Date    : 10/MAY/2011</p>
+  <p>This package contains definition of the Hamiltonian and lepton mixing 
+  matrixes. It also contains functions to calculated and store the neutrino
+  oscillation probabilities as well as survival probabilities.</p>
+  <p>Modified on 9/FEB/2012</p>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="NeutrinoCommons.neutrinocommon.neu.neuosc.ParamsContainer-class.html" class="summary-name">ParamsContainer</a><br />
+      This is an auxiliary class that its used in #<code 
+        class="link">CalNeuOscProbGSL</code>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="NeutrinoCommons.neutrinocommon.neu.neuosc.NeuFlavor-class.html" class="summary-name">NeuFlavor</a><br />
+      This class defines a neutrino of a given flavor in 3 generations.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="NeutrinoCommons.neutrinocommon.neu.neuosc.NeuMass-class.html" class="summary-name">NeuMass</a><br />
+      This class defines a neutrino of a given mass state in 3 
+        generations.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="NeutrinoCommons.neutrinocommon.neu.neuosc.MixMatrix-class.html" class="summary-name">MixMatrix</a><br />
+      This class contains all the definition of the rotation matrix and 
+        lepton mixing parametrization to generate the lepton mixing matrix.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">List</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#rvec" class="summary-sig-name">rvec</a>(<span class="summary-sig-arg">vv</span>,
+        <span class="summary-sig-arg">param</span>)</span><br />
+      Converts a complex n-vector into a real 2n-vector.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#rvec">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">List</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#cvec" class="summary-sig-name">cvec</a>(<span class="summary-sig-arg">vv</span>,
+        <span class="summary-sig-arg">param</span>)</span><br />
+      Converts a real 2n-vector into a complex n-vector.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#cvec">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">numpy array</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#massM2" class="summary-sig-name">massM2</a>(<span class="summary-sig-arg">param</span>)</span><br />
+      Mass term in the neutrino mass basis.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#massM2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">numpy array</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#flavorM2" class="summary-sig-name">flavorM2</a>(<span class="summary-sig-arg">param</span>)</span><br />
+      Mass term in the neutrino flavor basis.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#flavorM2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">numpy array</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#flavorAcc" class="summary-sig-name">flavorAcc</a>(<span class="summary-sig-arg">param</span>,
+        <span class="summary-sig-arg">E</span>,
+        <span class="summary-sig-arg">body</span>,
+        <span class="summary-sig-arg">track</span>)</span><br />
+      Neutrino matter potential.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#flavorAcc">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">numpy array</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#flavorH" class="summary-sig-name">flavorH</a>(<span class="summary-sig-arg">track</span>,
+        <span class="summary-sig-arg">param</span>,
+        <span class="summary-sig-arg">flavorM2</span>,
+        <span class="summary-sig-arg">body</span>,
+        <span class="summary-sig-arg">E</span>)</span><br />
+      Hamiltonian in the flavor basis multiplied by i.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#flavorH">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">List</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#RHS" class="summary-sig-name">RHS</a>(<span class="summary-sig-arg">neuvec</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">track</span>,
+        <span class="summary-sig-arg">param</span>,
+        <span class="summary-sig-arg">flavorM2</span>,
+        <span class="summary-sig-arg">body</span>,
+        <span class="summary-sig-arg">E</span>)</span><br />
+      Evaluates the RHS of Schrodinger's equation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#RHS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">List</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#OscProb" class="summary-sig-name">OscProb</a>(<span class="summary-sig-arg">cvec</span>,
+        <span class="summary-sig-arg">param</span>)</span><br />
+      Calculates probability from a complex state vector.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#OscProb">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">List</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#CompleteDecoherenceOscProb" class="summary-sig-name">CompleteDecoherenceOscProb</a>(<span class="summary-sig-arg">fneu_flavor</span>,
+        <span class="summary-sig-arg">PMNS</span>,
+        <span class="summary-sig-arg">param</span>)</span><br />
+      Calculates probability from a complex state vector on the complete 
+      decoherence case.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#CompleteDecoherenceOscProb">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">List</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#EvolveNeuState" class="summary-sig-name">EvolveNeuState</a>(<span class="summary-sig-arg">ineu</span>,
+        <span class="summary-sig-arg">E</span>,
+        <span class="summary-sig-arg">track</span>,
+        <span class="summary-sig-arg">body</span>,
+        <span class="summary-sig-arg">flavorM2</span>,
+        <span class="summary-sig-arg">param</span>)</span><br />
+      Evolves the neutrino state following the trayectory indicated in 
+      track.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#EvolveNeuState">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">List</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#CalNeuOscPy" class="summary-sig-name">CalNeuOscPy</a>(<span class="summary-sig-arg">ineu</span>,
+        <span class="summary-sig-arg">E</span>,
+        <span class="summary-sig-arg">track</span>,
+        <span class="summary-sig-arg">body</span>,
+        <span class="summary-sig-arg">flavorM2</span>,
+        <span class="summary-sig-arg">param</span>,
+        <span class="summary-sig-arg">complete_decoherence</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Calculates the probability vector [P_ie,P_imu,P_itau,P_is,...] where 
+      i is the neutrino flavor specified by ineu.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#CalNeuOscPy">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#CalNeuOscGSL" class="summary-sig-name">CalNeuOscGSL</a>(<span class="summary-sig-arg">ineu</span>,
+        <span class="summary-sig-arg">E</span>,
+        <span class="summary-sig-arg">track</span>,
+        <span class="summary-sig-arg">body</span>,
+        <span class="summary-sig-arg">flavorM2</span>,
+        <span class="summary-sig-arg">param</span>,
+        <span class="summary-sig-arg">file</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">family</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">NCCC_int</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">complete_decoherence</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">survival_prob</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">E_threshold</span>=<span class="summary-sig-default">1.0</span>,
+        <span class="summary-sig-arg">optimization</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">only_osc_prob</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Calculates the probability vector [P_ie,P_imu,P_itau,P_is,...] where i is 
+the neutrino flavor specified by ineu.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#CalNeuOscGSL">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">float/interpolator</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#InterOscProb" class="summary-sig-name">InterOscProb</a>(<span class="summary-sig-arg">ineu</span>,
+        <span class="summary-sig-arg">fneu</span>,
+        <span class="summary-sig-arg">E</span>,
+        <span class="summary-sig-arg">param</span>,
+        <span class="summary-sig-arg">datapath</span>=<span class="summary-sig-default">&quot;../data/&quot;</span>,
+        <span class="summary-sig-arg">Emin</span>=<span class="summary-sig-default">1.0</span>,
+        <span class="summary-sig-arg">Emax</span>=<span class="summary-sig-default">1000000.0</span>,
+        <span class="summary-sig-arg">return_interpolator</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Returns P(nu_ineu -&gt; nu_fneu) for osc.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#InterOscProb">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#InterSurProb" class="summary-sig-name">InterSurProb</a>(<span class="summary-sig-arg">E</span>,
+        <span class="summary-sig-arg">param</span>,
+        <span class="summary-sig-arg">Emin</span>=<span class="summary-sig-default">1.0</span>,
+        <span class="summary-sig-arg">Emax</span>=<span class="summary-sig-default">10000.0</span>,
+        <span class="summary-sig-arg">datapath</span>=<span class="summary-sig-default">&quot;../data/NeutrinoAbsorptionProb/&quot;</span>,
+        <span class="summary-sig-arg">return_interpolator</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Returns the survival probability prob in the multi-GeV range from 
+      previously generated data by linear interpolation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#InterSurProb">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#GenDataOscProbFlavor" class="summary-sig-name">GenDataOscProbFlavor</a>(<span class="summary-sig-arg">ineu</span>,
+        <span class="summary-sig-arg">Emin</span>,
+        <span class="summary-sig-arg">Emax</span>,
+        <span class="summary-sig-arg">body</span>,
+        <span class="summary-sig-arg">param</span>,
+        <span class="summary-sig-arg">savepath</span>=<span class="summary-sig-default">&quot;../data/test/&quot;</span>,
+        <span class="summary-sig-arg">binnum</span>=<span class="summary-sig-default">100</span>,
+        <span class="summary-sig-arg">integrator</span>=<span class="summary-sig-default">&quot;GSL&quot;</span>,
+        <span class="summary-sig-arg">complete_decoherence</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Calculates and saves the probabilities for a given configuration file
+      for a single neutrino flavor specified by ineu.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#GenDataOscProbFlavor">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#GenDataOscProb" class="summary-sig-name">GenDataOscProb</a>(<span class="summary-sig-arg">Emin</span>,
+        <span class="summary-sig-arg">Emax</span>,
+        <span class="summary-sig-arg">param</span>,
+        <span class="summary-sig-arg">binnum</span>=<span class="summary-sig-default">100</span>,
+        <span class="summary-sig-arg">zip</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">body</span>=<span class="summary-sig-default">bd.Sun()</span>,
+        <span class="summary-sig-arg">savepath</span>=<span class="summary-sig-default">&quot;../data/&quot;</span>,
+        <span class="summary-sig-arg">integrator</span>=<span class="summary-sig-default">&quot;GSL&quot;</span>,
+        <span class="summary-sig-arg">complete_decoherence</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Calculates and saves the probabilities for a given configuration 
+      file.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#GenDataOscProb">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#GenDataSurProb" class="summary-sig-name">GenDataSurProb</a>(<span class="summary-sig-arg">Emin</span>,
+        <span class="summary-sig-arg">Emax</span>,
+        <span class="summary-sig-arg">body</span>=<span class="summary-sig-default">bd.Sun()</span>,
+        <span class="summary-sig-arg">param</span>=<span class="summary-sig-default">PC.PhysicsConstants()</span>)</span><br />
+      Calculates and saves the neutrino survival probability.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#GenDataSurProb">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#GenEvents" class="summary-sig-name">GenEvents</a>(<span class="summary-sig-arg">ineu</span>,
+        <span class="summary-sig-arg">Emin</span>,
+        <span class="summary-sig-arg">Emax</span>,
+        <span class="summary-sig-arg">num_events</span>,
+        <span class="summary-sig-arg">body</span>=<span class="summary-sig-default">bd.Sun()</span>,
+        <span class="summary-sig-arg">param</span>=<span class="summary-sig-default">PC.PhysicsConstants()</span>,
+        <span class="summary-sig-arg">complete_decoherence</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Generates events using #<a 
+      href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#CalNeuOscGSL"
+      class="link">CalNeuOscGSL</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#GenEvents">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#flavorS" class="summary-sig-name">flavorS</a>(<span class="summary-sig-arg">L</span>,
+        <span class="summary-sig-arg">track</span>,
+        <span class="summary-sig-arg">param</span>,
+        <span class="summary-sig-arg">flavorM2</span>,
+        <span class="summary-sig-arg">body</span>,
+        <span class="summary-sig-arg">E</span>)</span><br />
+      Calculates evolution operator in constant density and molarity using 
+      Cayley-Hamilton formalism - omitting a global phase factor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#flavorS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#NuEvolution" class="summary-sig-name">NuEvolution</a>(<span class="summary-sig-arg">ineu</span>,
+        <span class="summary-sig-arg">fneu</span>,
+        <span class="summary-sig-arg">E</span>,
+        <span class="summary-sig-arg">track</span>,
+        <span class="summary-sig-arg">body</span>,
+        <span class="summary-sig-arg">flavorM2</span>,
+        <span class="summary-sig-arg">param</span>)</span><br />
+      Evolves a sate a number of steps.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#NuEvolution">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="AdiabaticProbability"></a><span class="summary-sig-name">AdiabaticProbability</span>(<span class="summary-sig-arg">ineu</span>,
+        <span class="summary-sig-arg">fneu</span>,
+        <span class="summary-sig-arg">E</span>,
+        <span class="summary-sig-arg">Ri</span>,
+        <span class="summary-sig-arg">body</span>,
+        <span class="summary-sig-arg">PMNS</span>,
+        <span class="summary-sig-arg">fM2</span>,
+        <span class="summary-sig-arg">param</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#AdiabaticProbability">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Eeigenvals"></a><span class="summary-sig-name">Eeigenvals</span>(<span class="summary-sig-arg">E</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">body</span>,
+        <span class="summary-sig-arg">fM2</span>,
+        <span class="summary-sig-arg">param</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#Eeigenvals">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#NeuComposition" class="summary-sig-name">NeuComposition</a>(<span class="summary-sig-arg">i</span>,
+        <span class="summary-sig-arg">E</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">body</span>,
+        <span class="summary-sig-arg">fM2</span>,
+        <span class="summary-sig-arg">param</span>,
+        <span class="summary-sig-arg">flavor</span>)</span><br />
+      Returns composition of neutrino i = 1,2,3,...,numneu 
+      (e,mu,tau,s1,s2...,s_numeu-3)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#NeuComposition">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="PYGSL_ERROR"></a><span class="summary-name">PYGSL_ERROR</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="OPTNEUOSC_ERROR"></a><span class="summary-name">OPTNEUOSC_ERROR</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="TAUOLA_ERROR"></a><span class="summary-name">TAUOLA_ERROR</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="NUSIGMA_ERROR"></a><span class="summary-name">NUSIGMA_ERROR</span> = <code title="True">True</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="rvec"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rvec</span>(<span class="sig-arg">vv</span>,
+        <span class="sig-arg">param</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#rvec">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Converts a complex n-vector into a real 2n-vector.</p>
+  <p>Note : param.numneu sets the vector size.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>vv</code></strong> (List) - complex vector.</li>
+        <li><strong class="pname"><code>param</code></strong> (PhysicsConstants) - set of physical parameters to be used.</li>
+    </ul></dd>
+    <dt>Returns: List</dt>
+        <dd>real vector.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="cvec"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cvec</span>(<span class="sig-arg">vv</span>,
+        <span class="sig-arg">param</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#cvec">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Converts a real 2n-vector into a complex n-vector.</p>
+  <p>Note : param.numneu sets the vector size.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>vv</code></strong> (List) - complex vector.</li>
+        <li><strong class="pname"><code>param</code></strong> (PhysicsConstants) - set of physical parameters to be used.</li>
+    </ul></dd>
+    <dt>Returns: List</dt>
+        <dd>real vector.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="massM2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">massM2</span>(<span class="sig-arg">param</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#massM2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Mass term in the neutrino mass basis.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>param</code></strong> (PhysicsConstants) - set of physical parameters to be used.</li>
+    </ul></dd>
+    <dt>Returns: numpy array</dt>
+        <dd>mass matrix in mass basis.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="flavorM2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">flavorM2</span>(<span class="sig-arg">param</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#flavorM2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Mass term in the neutrino flavor basis.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>param</code></strong> (PhysicsConstants) - set of physical parameters to be used.</li>
+    </ul></dd>
+    <dt>Returns: numpy array</dt>
+        <dd>mass matrix in flavor basis.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="flavorAcc"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">flavorAcc</span>(<span class="sig-arg">param</span>,
+        <span class="sig-arg">E</span>,
+        <span class="sig-arg">body</span>,
+        <span class="sig-arg">track</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#flavorAcc">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Neutrino matter potential.</p>
+  <p>Note : Neutrino energy is not used in this function since the neutrino
+  energy has been factorized an is on the hamiltonian.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>param</code></strong> (PhysicsConstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>E</code></strong> (Float) - neutrino energy [eV].</li>
+        <li><strong class="pname"><code>body</code></strong> (Body) - body where the neutrino will propagate (e.g. Earth,Sun,...)</li>
+        <li><strong class="pname"><code>track</code></strong> (Track) - trayectory within the body.</li>
+    </ul></dd>
+    <dt>Returns: numpy array</dt>
+        <dd>neutrino matter potential matrix.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="flavorH"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">flavorH</span>(<span class="sig-arg">track</span>,
+        <span class="sig-arg">param</span>,
+        <span class="sig-arg">flavorM2</span>,
+        <span class="sig-arg">body</span>,
+        <span class="sig-arg">E</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#flavorH">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Hamiltonian in the flavor basis multiplied by i.</p>
+  <p>Note : This is really the RHS of the Mikheev-Smirnov-Wolfenstein 
+  equation.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>track</code></strong> (Track) - trayectory within the body.</li>
+        <li><strong class="pname"><code>param</code></strong> (PhysicsConstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>flavorM2</code></strong> (numpy array) - Mass square difference in the flavor basis.</li>
+        <li><strong class="pname"><code>body</code></strong> (Body) - body where the neutrino will propagate (e.g. Earth,Sun,...)</li>
+        <li><strong class="pname"><code>E</code></strong> (Float) - neutrino energy [eV].</li>
+    </ul></dd>
+    <dt>Returns: numpy array</dt>
+        <dd>neutrino matter potential matrix.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="RHS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RHS</span>(<span class="sig-arg">neuvec</span>,
+        <span class="sig-arg">x</span>,
+        <span class="sig-arg">track</span>,
+        <span class="sig-arg">param</span>,
+        <span class="sig-arg">flavorM2</span>,
+        <span class="sig-arg">body</span>,
+        <span class="sig-arg">E</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#RHS">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Evaluates the RHS of Schrodinger's equation.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>neuvec</code></strong> (List) - real neutrino state 2n-vector.</li>
+        <li><strong class="pname"><code>x</code></strong> (Float) - position in the trayectory [eV^-1]</li>
+        <li><strong class="pname"><code>track</code></strong> (Track) - trayectory within the body.</li>
+        <li><strong class="pname"><code>param</code></strong> (PhysicsConstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>flavorM2</code></strong> (numpy array) - Mass square difference in the flavor basis.</li>
+        <li><strong class="pname"><code>body</code></strong> (Body) - body where the neutrino will propagate (e.g. Earth,Sun,...)</li>
+        <li><strong class="pname"><code>E</code></strong> (Float) - neutrino energy [eV].</li>
+    </ul></dd>
+    <dt>Returns: List</dt>
+        <dd>real neutrino state 2n-vector</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="OscProb"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">OscProb</span>(<span class="sig-arg">cvec</span>,
+        <span class="sig-arg">param</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#OscProb">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculates probability from a complex state vector.</p>
+  <p>Note : param.numneu sets the vector size.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>cvec</code></strong> (List) - complex vector.</li>
+        <li><strong class="pname"><code>param</code></strong> (PhysicsConstants) - set of physical parameters to be used.</li>
+    </ul></dd>
+    <dt>Returns: List</dt>
+        <dd>real probability vector.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CompleteDecoherenceOscProb"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CompleteDecoherenceOscProb</span>(<span class="sig-arg">fneu_flavor</span>,
+        <span class="sig-arg">PMNS</span>,
+        <span class="sig-arg">param</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#CompleteDecoherenceOscProb">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculates probability from a complex state vector on the complete 
+  decoherence case.</p>
+  <p>Note : param.numneu sets the vector size.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>fneu_flavor</code></strong> (List) - complex vector.</li>
+        <li><strong class="pname"><code>PMNS</code></strong> (MixingMatrix) - lepton mixing matrix.</li>
+        <li><strong class="pname"><code>param</code></strong> (PhysicsConstants) - set of physical parameters to be used.</li>
+    </ul></dd>
+    <dt>Returns: List</dt>
+        <dd>real probability vector.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="EvolveNeuState"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">EvolveNeuState</span>(<span class="sig-arg">ineu</span>,
+        <span class="sig-arg">E</span>,
+        <span class="sig-arg">track</span>,
+        <span class="sig-arg">body</span>,
+        <span class="sig-arg">flavorM2</span>,
+        <span class="sig-arg">param</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#EvolveNeuState">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Evolves the neutrino state following the trayectory indicated in 
+  track. The initial neutrino state is specified by ineu and its energy is 
+  E.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ineu</code></strong> (int) - 0:electron,1:muon,2:tau</li>
+        <li><strong class="pname"><code>E</code></strong> (float) - neutrino energy [eV].</li>
+        <li><strong class="pname"><code>track</code></strong> (Track) - trayectory within the body.</li>
+        <li><strong class="pname"><code>body</code></strong> (Body) - body where the neutrino will propagate (e.g. Earth,Sun,...)</li>
+        <li><strong class="pname"><code>flavorM2</code></strong> (numpy array) - Mass square difference in the flavor basis.</li>
+        <li><strong class="pname"><code>param</code></strong> (PhysicsConstants) - set of physical parameters to be used.</li>
+    </ul></dd>
+    <dt>Returns: List</dt>
+        <dd>complex neutrino state n-vector</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CalNeuOscPy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalNeuOscPy</span>(<span class="sig-arg">ineu</span>,
+        <span class="sig-arg">E</span>,
+        <span class="sig-arg">track</span>,
+        <span class="sig-arg">body</span>,
+        <span class="sig-arg">flavorM2</span>,
+        <span class="sig-arg">param</span>,
+        <span class="sig-arg">complete_decoherence</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#CalNeuOscPy">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculates the probability vector [P_ie,P_imu,P_itau,P_is,...] where i
+  is the neutrino flavor specified by ineu.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ineu</code></strong> (int) - flavor of the initial neutrino (0 : e, 1 : mu, 2 : tau)</li>
+        <li><strong class="pname"><code>E</code></strong> (float) - neutrino energy [eV]</li>
+        <li><strong class="pname"><code>track</code></strong> (Track) - trayectory within the body.</li>
+        <li><strong class="pname"><code>body</code></strong> (Body) - body where the neutrino will propagate (e.g. Earth,Sun,...)</li>
+        <li><strong class="pname"><code>flavorM2</code></strong> (numpy array) - Mass square difference in the flavor basis.</li>
+        <li><strong class="pname"><code>param</code></strong> (PhysicsConstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>complete_decoherence</code></strong> (Boolean) - If True will calculate probabilities assuming complete 
+          decoherence.</li>
+    </ul></dd>
+    <dt>Returns: List</dt>
+        <dd>oscillation probability list.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CalNeuOscGSL"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalNeuOscGSL</span>(<span class="sig-arg">ineu</span>,
+        <span class="sig-arg">E</span>,
+        <span class="sig-arg">track</span>,
+        <span class="sig-arg">body</span>,
+        <span class="sig-arg">flavorM2</span>,
+        <span class="sig-arg">param</span>,
+        <span class="sig-arg">file</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">family</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">NCCC_int</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">complete_decoherence</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">survival_prob</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">E_threshold</span>=<span class="sig-default">1.0</span>,
+        <span class="sig-arg">optimization</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">only_osc_prob</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#CalNeuOscGSL">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Calculates the probability vector [P_ie,P_imu,P_itau,P_is,...] where i is 
+the neutrino flavor specified by ineu. Also returns the survival probability.
+
+Calculates the probabilities using the RK algorithm from the GSL library. When
+the optimization flag is True it uses rediagonalization at each step in order
+to increase speed. This technique is documented on C.A.Arguelles,J.Kopp (2012).
+
+When the NCCC_int flag is True neutrino interactions with matter will be considered,
+in such a way that if the neutrino experiences a NC-interaction its energy will
+be shifted accordingly, and if the neutrino experiences a CC-interaction in the
+electron or muon flavor state the event will be discarted. On the other hand, if
+the neutrino experiences a CC-interaction in the tau flavor tau regeneration is 
+implemented by calling this routine recursively.
+
+NC and CC interactions are implemented using the differential cross section 
+provided by NUSIGMA, here implemented by the nudsde nusigma-interface. Futhermore
+tau regeneration is implemented using TAUOLA via the taudecay tauola-interface.
+
+When called by the #L{GenerateMCEvents} this provides an easy way of generating
+montecarlo events on the NCCC_int = True mode.
+
+UPDATED: 
+- Updated to also return the survival probabilities at each step when survival_prob = True.
+
+@type   ineu    :   int
+@param  ineu    :   initial neutrino state
+@type   E       :   float
+@param  E       :   neutrino energy [eV]
+@type   track   :   track object
+@param  track   :   asociated trayectory in body
+@type   body    :   body
+@param  body    :   body with the asociated density profile.
+@type   flavorM2:   array
+@param  flavorM2:   M^2 in flavor basis
+@type   param   :   physicsconstants
+@param  param   :   set of physical parameters to be used.
+@type   file    :   file object
+@param  file    :   open file where data will be printed, if None will return result.
+@type   family  :   integer
+@param  family  :   returns the same integer for all neutrinos in the same event.
+@type   NCCC_int:   boolean
+@param  NCCC_int:   toggle NC-CC interactions ON/OFF
+@type   complete_decoherence:   boolean
+@param  complete_decoherence:   toggle complete decoherence interactions ON/OFF    
+@type   survival_prob:   boolean
+@param  survival_prob:   save intermediate survival probabilities.
+@type   E_threshold:   float
+@param  E_threshold:   Lower neutrino energy threshold. [GeV]
+@type   optimization:   boolean
+@param  optimization:   toogle rediagonalization optimization ON/OFF.
+@type   only_osc_prob:   boolean
+@param  only_osc_prob:   will only print the oscillation probabilities.
+
+@rtype          :   List
+@return         :   oscillation probability list.    
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="InterOscProb"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">InterOscProb</span>(<span class="sig-arg">ineu</span>,
+        <span class="sig-arg">fneu</span>,
+        <span class="sig-arg">E</span>,
+        <span class="sig-arg">param</span>,
+        <span class="sig-arg">datapath</span>=<span class="sig-default">&quot;../data/&quot;</span>,
+        <span class="sig-arg">Emin</span>=<span class="sig-default">1.0</span>,
+        <span class="sig-arg">Emax</span>=<span class="sig-default">1000000.0</span>,
+        <span class="sig-arg">return_interpolator</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#InterOscProb">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns P(nu_ineu -&gt; nu_fneu) for osc. prob in the multi-GeV range 
+  from previously generated data by linear interpolation.</p>
+  <p>Note : Uses data calculated by #<code 
+  class="link">DataNeuOscProb</code>. Updated to return the probability in 
+  any previouly calculated configuration.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ineu</code></strong> (integer) - flavor of the initial neutrino (0 : e, 1 : mu, 2 : tau)</li>
+        <li><strong class="pname"><code>fneu</code></strong> (integer) - flavor of the final neutrino (0 : e, 1 : mu, 2 : tau)</li>
+        <li><strong class="pname"><code>E</code></strong> (float) - neutrino energy [eV]</li>
+        <li><strong class="pname"><code>param</code></strong> (PhysicsConstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>datapath</code></strong> (string) - path to the data files.</li>
+        <li><strong class="pname"><code>Emin</code></strong> (float) - Minimum neutrino energy [GeV]</li>
+        <li><strong class="pname"><code>Emax</code></strong> (float) - Maximum neutrino energy [GeV].</li>
+        <li><strong class="pname"><code>return_interpolator</code></strong> (Boolean) - If return interpolator = True : will return the interpolator 
+          instead of value.</li>
+    </ul></dd>
+    <dt>Returns: float/interpolator</dt>
+        <dd>oscillation probability/interpolator</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="InterSurProb"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">InterSurProb</span>(<span class="sig-arg">E</span>,
+        <span class="sig-arg">param</span>,
+        <span class="sig-arg">Emin</span>=<span class="sig-default">1.0</span>,
+        <span class="sig-arg">Emax</span>=<span class="sig-default">10000.0</span>,
+        <span class="sig-arg">datapath</span>=<span class="sig-default">&quot;../data/NeutrinoAbsorptionProb/&quot;</span>,
+        <span class="sig-arg">return_interpolator</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#InterSurProb">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the survival probability prob in the multi-GeV range from 
+  previously generated data by linear interpolation.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>E</code></strong> (float) - neutrino energy [eV]</li>
+        <li><strong class="pname"><code>param</code></strong> (physicsconstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>Emin</code></strong> (float) - Minimum neutrino energy [GeV]</li>
+        <li><strong class="pname"><code>Emax</code></strong> (float) - Maximum neutrino energy [GeV].</li>
+        <li><strong class="pname"><code>datapath</code></strong> (string) - path to the data files.</li>
+        <li><strong class="pname"><code>return_interpolator</code></strong> (Boolean) - If return interpolator = True : will return the interpolator 
+          instead of value.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GenDataOscProbFlavor"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GenDataOscProbFlavor</span>(<span class="sig-arg">ineu</span>,
+        <span class="sig-arg">Emin</span>,
+        <span class="sig-arg">Emax</span>,
+        <span class="sig-arg">body</span>,
+        <span class="sig-arg">param</span>,
+        <span class="sig-arg">savepath</span>=<span class="sig-default">&quot;../data/test/&quot;</span>,
+        <span class="sig-arg">binnum</span>=<span class="sig-default">100</span>,
+        <span class="sig-arg">integrator</span>=<span class="sig-default">&quot;GSL&quot;</span>,
+        <span class="sig-arg">complete_decoherence</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#GenDataOscProbFlavor">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculates and saves the probabilities for a given configuration file 
+  for a single neutrino flavor specified by ineu.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>Emin</code></strong> (float) - minimum neutrino energy [eV]</li>
+        <li><strong class="pname"><code>Emax</code></strong> (float) - maximum neutrino energy [eV]</li>
+        <li><strong class="pname"><code>body</code></strong> (body) - body with the asociated density profile.</li>
+        <li><strong class="pname"><code>param</code></strong> (physicsconstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>savepath</code></strong> (physicsconstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>binnum</code></strong> (physicsconstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>integrator</code></strong> (string) - &quot;GSL&quot;: GSL integrator, &quot;Py&quot; : python 
+          integrator</li>
+        <li><strong class="pname"><code>complete_decoherence</code></strong> (boolean) - toogle complete decoherence ON/OFF</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GenDataOscProb"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GenDataOscProb</span>(<span class="sig-arg">Emin</span>,
+        <span class="sig-arg">Emax</span>,
+        <span class="sig-arg">param</span>,
+        <span class="sig-arg">binnum</span>=<span class="sig-default">100</span>,
+        <span class="sig-arg">zip</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">body</span>=<span class="sig-default">bd.Sun()</span>,
+        <span class="sig-arg">savepath</span>=<span class="sig-default">&quot;../data/&quot;</span>,
+        <span class="sig-arg">integrator</span>=<span class="sig-default">&quot;GSL&quot;</span>,
+        <span class="sig-arg">complete_decoherence</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#GenDataOscProb">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculates and saves the probabilities for a given configuration 
+  file.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>Emin</code></strong> (float) - minimum energy [GeV]</li>
+        <li><strong class="pname"><code>Emax</code></strong> (float) - maximum energy [GeV]</li>
+        <li><strong class="pname"><code>param</code></strong> (physicsconstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>binnum</code></strong> (integer) - number of bins</li>
+        <li><strong class="pname"><code>zip</code></strong> (boolean) - if true will zip all files together</li>
+        <li><strong class="pname"><code>savepath</code></strong> (string) - location where the data will be saved</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GenDataSurProb"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GenDataSurProb</span>(<span class="sig-arg">Emin</span>,
+        <span class="sig-arg">Emax</span>,
+        <span class="sig-arg">body</span>=<span class="sig-default">bd.Sun()</span>,
+        <span class="sig-arg">param</span>=<span class="sig-default">PC.PhysicsConstants()</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#GenDataSurProb">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculates and saves the neutrino survival probability.</p>
+  <p>UPDATED TO INCLUDE CC+NC INTERACTIONS IN ABSORPTION.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>Emin</code></strong> (float) - neutrino energy [eV]</li>
+        <li><strong class="pname"><code>Emax</code></strong> (float) - neutrino energy [eV]</li>
+        <li><strong class="pname"><code>body</code></strong> (body) - body where the neutrino will propagate.</li>
+        <li><strong class="pname"><code>param</code></strong> (physicsconstants) - set of physical parameters to be used.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GenEvents"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GenEvents</span>(<span class="sig-arg">ineu</span>,
+        <span class="sig-arg">Emin</span>,
+        <span class="sig-arg">Emax</span>,
+        <span class="sig-arg">num_events</span>,
+        <span class="sig-arg">body</span>=<span class="sig-default">bd.Sun()</span>,
+        <span class="sig-arg">param</span>=<span class="sig-default">PC.PhysicsConstants()</span>,
+        <span class="sig-arg">complete_decoherence</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#GenEvents">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Generates events using #<a 
+  href="NeutrinoCommons.neutrinocommon.neu.neuosc-module.html#CalNeuOscGSL"
+  class="link">CalNeuOscGSL</a>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ineu</code></strong> (int) - initial neutrino state</li>
+        <li><strong class="pname"><code>Emix</code></strong> - neutrino energy [GeV]</li>
+        <li><strong class="pname"><code>Emax</code></strong> - neutrino energy [GeV]</li>
+        <li><strong class="pname"><code>num_events</code></strong> (int) - number of events generated</li>
+        <li><strong class="pname"><code>param</code></strong> (physicsconstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>Eman</code></strong> (float)</li>
+        <li><strong class="pname"><code>Emin</code></strong> (float)</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="flavorS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">flavorS</span>(<span class="sig-arg">L</span>,
+        <span class="sig-arg">track</span>,
+        <span class="sig-arg">param</span>,
+        <span class="sig-arg">flavorM2</span>,
+        <span class="sig-arg">body</span>,
+        <span class="sig-arg">E</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#flavorS">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculates evolution operator in constant density and molarity using 
+  Cayley-Hamilton formalism - omitting a global phase factor.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>L</code></strong> (float) - baseline [eV^-1]</li>
+        <li><strong class="pname"><code>track</code></strong> (physicsconstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>param</code></strong> (string) - location where the data will be saved</li>
+        <li><strong class="pname"><code>flavorM2</code></strong> (boolean) - if true will zip all files together</li>
+        <li><strong class="pname"><code>body</code></strong> (body) - body where the neutrino propagates.</li>
+        <li><strong class="pname"><code>E</code></strong> (float) - neutrino energy [eV]</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="NuEvolution"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">NuEvolution</span>(<span class="sig-arg">ineu</span>,
+        <span class="sig-arg">fneu</span>,
+        <span class="sig-arg">E</span>,
+        <span class="sig-arg">track</span>,
+        <span class="sig-arg">body</span>,
+        <span class="sig-arg">flavorM2</span>,
+        <span class="sig-arg">param</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#NuEvolution">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Evolves a sate a number of steps.</p>
+  <p>Note : Incomplete.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>fneu</code></strong> - baseline [eV^-1]</li>
+        <li><strong class="pname"><code>track</code></strong> (physicsconstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>E</code></strong> (float) - neutrino energy [eV]</li>
+        <li><strong class="pname"><code>body</code></strong> (body) - body where the neutrino propagates.</li>
+        <li><strong class="pname"><code>flavorM2</code></strong> (boolean) - if true will zip all files together</li>
+        <li><strong class="pname"><code>param</code></strong> (string) - location where the data will be saved</li>
+        <li><strong class="pname"><code>ineu</code></strong> (float)</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="NeuComposition"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">NeuComposition</span>(<span class="sig-arg">i</span>,
+        <span class="sig-arg">E</span>,
+        <span class="sig-arg">x</span>,
+        <span class="sig-arg">body</span>,
+        <span class="sig-arg">fM2</span>,
+        <span class="sig-arg">param</span>,
+        <span class="sig-arg">flavor</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="NeutrinoCommons.neutrinocommon.neu.neuosc-pysrc.html#NeuComposition">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns composition of neutrino i = 1,2,3,...,numneu 
+  (e,mu,tau,s1,s2...,s_numeu-3)</p>
+  <p>Note : i starts from 0.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>i</code></strong> (float) - minimum energy [GeV]</li>
+        <li><strong class="pname"><code>E</code></strong> (float) - maximum energy [GeV]</li>
+        <li><strong class="pname"><code>x</code></strong> (physicsconstants) - set of physical parameters to be used.</li>
+        <li><strong class="pname"><code>body</code></strong> (integer) - number of bins</li>
+        <li><strong class="pname"><code>fM2</code></strong> (boolean) - if true will zip all files together</li>
+        <li><strong class="pname"><code>param</code></strong> (string) - location where the data will be saved</li>
+        <li><strong class="pname"><code>flavor</code></strong> (boolean) - if flavor = True : returns composition as a function of the mass 
+          basis. if flavor = False: returns composition as a function of 
+          the flavor basis.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >neutrinocommon</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Feb 13 04:34:26 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
